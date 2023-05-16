@@ -1,6 +1,7 @@
-<script setup>
+<script>
 import { ref, onMounted } from 'vue'
 import { supabase } from './lib/supabaseClient'
+import { RouterLink, RouterView } from 'vue-router'
 
 const countries = ref([])
 
@@ -15,6 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
+
   <div id="container">
     <div id="header"> 
     <h1>Sign Up</h1>
@@ -27,6 +29,13 @@ onMounted(() => {
   </div>
 </div>
   </div>
+  <div id="container">
+    <RouterLink to="/">Sign Up / Log in</RouterLink>
+    <br>
+    <RouterLink to="/Attendance">Attendance</RouterLink>
+<RouterView />
+  </div>
+  
 </template>
 
 <style scoped>
