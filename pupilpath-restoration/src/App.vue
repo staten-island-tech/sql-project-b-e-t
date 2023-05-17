@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { supabase } from './lib/supabaseClient'
+import { RouterLink, RouterView } from 'vue-router'
 
 const countries = ref([])
 
@@ -16,26 +17,14 @@ onMounted(() => {
 
 <template>
   <div id="container">
-    <div id="header"> 
-    <h1>Sign Up</h1>
-  <div class="info">
-    Username: <input type="text" v-model="username" />
-    <br>
-    Password: <input type="text" v-model="password" />
-    <button type="button">Submit</button>
-    <!-- <li v-for="country in countries" :key="country.id">{{ country.name }}</li> -->
-  </div>
-</div>
+    <RouterLink to="/" draggable="false">Sign/Log in</RouterLink>
+    <RouterLink to="/Grades" draggable="false">Grades</RouterLink>
+    <RouterView />
   </div>
 </template>
 
 <style scoped>
-.info {
-  font-size: 20px;
-  margin: auto 5px;
-}
 #header {
   font-size: 40px;
 }
-
 </style>
