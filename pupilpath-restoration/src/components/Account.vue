@@ -7,6 +7,8 @@ const { session } = toRefs(props)
 
 const loading = ref(true)
 const username = ref('')
+const first_name = ref('')
+const last_name = ref('')
 const website = ref('')
 const avatar_url = ref('')
 
@@ -21,14 +23,15 @@ async function getProfile() {
 
     let { data, error, status } = await supabase
       .from('profiles')
-      .select(`username, website, avatar_url`)
+      .select(`first_name, last_name, username, website, avatar_url`)
       .eq('id', user.id)
-      .single()
 
     if (error && status !== 406) throw error
 
     if (data) {
       username.value = data.username
+      first_name.value = data.first_name
+      last_name.value = data.last_name
       website.value = data.website
       avatar_url.value = data.avatar_url
     }
@@ -47,9 +50,10 @@ async function updateProfile() {
     const updates = {
       id: user.id,
       username: username.value,
+      first_name: first_name.value,
+      last_name: last_name.value,
       website: website.value,
       avatar_url: avatar_url.value,
-      updated_at: new Date(),
     }
 
     let { error } = await supabase.from('profiles').upsert(updates)
@@ -82,8 +86,20 @@ async function signOut() {
       <input id="email" type="text" :value="session.user.email" disabled />
     </div>
     <div>
-      <label for="username">Name</label>
+      <label for="username">Username</label>
       <input id="username" type="text" v-model="username" />
+    </div>
+    <div>
+      <label for="firstname">First Name</label>
+      <input id="firstname" type="text" v-model="first_name" />
+    </div>
+    <div>
+      <label for="lastname">Last Name</label>
+      <input id="lastname" type="text" v-model="last_name" />
+    </div>
+    <div>
+      <label for="avatarurl">Avatar Url</label>
+      <input id="avatarurl" type="text" v-model="avatar_url" />
     </div>
     <div>
       <label for="website">Website</label>
