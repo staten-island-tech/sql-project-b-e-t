@@ -31,13 +31,13 @@ const handleLogin = async () => {
       <div>
         <input class="inputField" required type="email" placeholder="Your email" v-model="email" />
       </div>
-      <div>
-        <input
+      <input
           type="submit"
           class="button block"
           :value="loading ? 'Loading' : 'Send magic link'"
           :disabled="loading"
         />
+      <div>
       </div>
     </div>
   </form>

@@ -9,7 +9,6 @@ const loading = ref(true)
 const username = ref('')
 const first_name = ref('')
 const last_name = ref('')
-const website = ref('')
 const avatar_url = ref('')
 
 onMounted(() => {
@@ -23,7 +22,7 @@ async function getProfile() {
 
     let { data, error, status } = await supabase
       .from('profiles')
-      .select(`first_name, last_name, username, website, avatar_url`)
+      .select(`first_name, last_name, username, avatar_url`)
       .eq('id', user.id)
 
     if (error && status !== 406) throw error
@@ -32,7 +31,6 @@ async function getProfile() {
       username.value = data.username
       first_name.value = data.first_name
       last_name.value = data.last_name
-      website.value = data.website
       avatar_url.value = data.avatar_url
     }
   } catch (error) {
@@ -52,7 +50,6 @@ async function updateProfile() {
       username: username.value,
       first_name: first_name.value,
       last_name: last_name.value,
-      website: website.value,
       avatar_url: avatar_url.value,
     }
 
@@ -100,10 +97,6 @@ async function signOut() {
     <div>
       <label for="avatarurl">Avatar Url</label>
       <input id="avatarurl" type="text" v-model="avatar_url" />
-    </div>
-    <div>
-      <label for="website">Website</label>
-      <input id="website" type="url" v-model="website" />
     </div>
 
     <div>
