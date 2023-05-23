@@ -9,8 +9,8 @@
   const handleLogin = async () => {
     try {
       loading.value = true
-      const { error } = await supabase.auth.signIn({
-        username: `${username.value}`,
+      const { error } = await supabase.auth.signInWithPassword({
+        username: username.value,
         password: password.value,
       })
       if (error) throw error
