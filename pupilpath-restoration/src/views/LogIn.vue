@@ -1,15 +1,24 @@
+<script setup>
+import { onMounted, ref } from 'vue'
+import SignIn from '../components/SignIn.vue'
+import Auth from '../components/Auth.vue'
+import { supabase } from '../supabase'
+
+const session = ref()
+
+onMounted(() => {
+  supabase.auth.getSession().then(({ data }) => {
+    session.value = data.session
+  })
+
+  supabase.auth.onAuthStateChange((_, _session) => {
+    session.value = _session
+  })
+})
+</script>
 <template>
-  <div class="about">
-    <h1>Log in</h1>
+  <div class="container" style="padding: 50px 0 100px 0">
+    <SignIn v-if="session" :session="session" />
+    <Auth v-else />
   </div>
 </template>
-
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
