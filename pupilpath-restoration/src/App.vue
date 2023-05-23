@@ -6,6 +6,7 @@ import { RouterLink, RouterView } from 'vue-router'
   <div id="container">
     <RouterLink to="/" draggable="false" class="router">Sign/Log in</RouterLink>
     <RouterLink to="/Grades" draggable="false" class="router">Grades</RouterLink>
+    <RouterLink to="/Attendance" draggable="false" class="router">Attendance</RouterLink>
     <RouterView />
   </div>
 </template>
