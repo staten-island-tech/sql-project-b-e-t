@@ -4,7 +4,8 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <div id="container" false>
-    <RouterLink to="/" draggable="false" class="router">Sign/Log in</RouterLink>
+    <RouterLink to="/" draggable="false" class="router">Sign Up</RouterLink>
+    <RouterLink to="/Login" draggable="false" class="router">Log In</RouterLink>
     <RouterLink to="/Grades" draggable="false" class="router">Grades</RouterLink>
     <RouterView />
   </div>
