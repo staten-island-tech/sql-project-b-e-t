@@ -1,49 +1,53 @@
-<script setup>
-  import { ref } from 'vue'
-  import { supabase } from '../supabase'
-  
-  const loading = ref(false)
-  const username = ref('')
-  const password = ref('')
-  
-  const handleLogin = async () => {
-    try {
-      loading.value = true
-      const { error } = await supabase.auth.signInWithPassword({
-        username: username.value,
-        password: password.value,
-      })
-      if (error) throw error
-      alert('Logged in successfully!')
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(error.message)
-      }
-    } finally {
-      loading.value = false
-    }
-  }
-  </script>
-
 <template>
-    <form class="row flex-center flex" @submit.prevent="handleLogin">
-      <div class="col-6 form-widget">
-        <h1 class="header">Login</h1>
-        <div>
-          <input class="inputField" required type="text" placeholder="Username" v-model="username" />
-        </div>
-        <div>
-          <input class="inputField" required type="password" placeholder="Password" v-model="password" />
-        </div>
-        <div>
-          <input
-            type="submit"
-            class="button block"
-            :value="loading ? 'Loading' : 'Login'"
-            :disabled="loading"
-          />
-        </div>
+  <div>
+    <h2>Sign in to your account</h2>
+    <form @submit.prevent="handleSignin">
+      <div>
+        <label for="email">Email</label>
+        <input id="email" type="email" v-model="email" />
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input id="password" type="password" v-model="password" />
+      </div>
+      <div>
+        <button type="submit">Sign in</button>
       </div>
     </form>
-  </template>
-  
+  </div>
+</template>
+
+<script>
+import { ref } from "vue";
+import { supabase } from "../supabase";
+
+export default {
+  setup() {
+    const email = ref("");
+    const password = ref("");
+
+    const handleSignin = async () => {
+      
+      let { data } = await supabase
+      .from('profiles')
+      .select(`password, email`)
+
+      try {
+        const { error } = await supabase.auth.signInWithPassword({
+          email: data.email,
+          password: data.password,
+        });
+        if (error) throw error;
+      } catch (error) {
+        alert(error.error_description || error.message);
+      }
+    };
+
+    return {
+      email,
+      password,
+      handleSignin,
+    };
+  },
+};
+</script>
