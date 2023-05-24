@@ -1,12 +1,33 @@
 <template>
-    <div class="about">
-      <h2>Green = Present</h2>
-      <h2>Orange = Late</h2>
-      <h2>Red = Absent</h2>
-    </div>
+  <h1>Attendance</h1>
+<div class="grid">
+  <div class="grid-item">1</div>
+  <div class="grid-item">2</div>
+  <div class="grid-item">3</div>  
+  <div class="grid-item">4</div>
+  <div class="grid-item">5</div>
+  <div class="grid-item">6</div>  
+  <div class="grid-item">7</div>
+  <div class="grid-item">8</div>
+  <div class="grid-item">9</div>  
+</div>
   </template>
   
   <style>
+.grid{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
   @media (min-width: 1024px) {
     .about {
       min-height: 100vh;
