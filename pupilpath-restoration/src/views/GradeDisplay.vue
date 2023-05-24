@@ -1,39 +1,39 @@
 <template>
   <table>
     <tr>
-      <th>Subject</th>
-      <th>Teacher</th>
-      <th>Grade</th>
+      <th class="title">Subject</th>
+      <th class="title">Teacher</th>
+      <th class="title">Grade</th>
     </tr>
     <tr>
-      <td>Alfreds Futterkiste</td>
-      <td>Maria Anders</td>
-      <td>Germany</td>
+      <td>English</td>
+      <td>A</td>
+      <td>0</td>
     </tr>
     <tr>
-      <td>Centro comercial Moctezuma</td>
-      <td>Francisco Chang</td>
-      <td>Mexico</td>
+      <td>Math</td>
+      <td>B</td>
+      <td>0</td>
     </tr>
     <tr>
-      <td>Ernst Handel</td>
-      <td>Roland Mendel</td>
-      <td>Austria</td>
+      <td>History</td>
+      <td>C</td>
+      <td>0</td>
     </tr>
     <tr>
-      <td>Island Trading</td>
-      <td>Helen Bennett</td>
-      <td>UK</td>
+      <td>Science</td>
+      <td>D</td>
+      <td>0</td>
     </tr>
     <tr>
-      <td>Laughing Bacchus Winecellars</td>
-      <td>Yoshi Tannamuri</td>
-      <td>Canada</td>
+      <td>Russian</td>
+      <td>E</td>
+      <td>0</td>
     </tr>
     <tr>
-      <td>Magazzini Alimentari Riuniti</td>
-      <td>Giovanni Rovelli</td>
-      <td>Italy</td>
+      <td>Lunch</td>
+      <td>F</td>
+      <td>0</td>
     </tr>
   </table>
 </template>
@@ -44,5 +44,8 @@ th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+}
+.title {
+  font-size: 50px;
 }
 </style>
