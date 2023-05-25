@@ -11,43 +11,60 @@
         <input id="password" type="password" v-model="password" />
       </div>
       <div>
-        <button type="submit">Sign in</button>
+        <button type="submit" @click="handleSignIn">Sign in</button>
       </div>
     </form>
   </div>
 </template>
 
-<script>
-import { ref } from "vue";
+<script setup>
+import { onMounted, ref } from "vue";
 import { supabase } from "../supabase";
 
-export default {
-  setup() {
-    const email = ref("");
-    const password = ref("");
+// export default {
+//   setup() {
 
-    const handleSignin = async () => {
+//   onMounted(() => {
+//   handleSignIn()
+// })
+//     const email = ref("");
+//     const password = ref("");
+
+//     const handleSignIn = async () => {
       
-      let { data } = await supabase
-      .from('profiles')
-      .select(`password, email`)
+//       try {
+//         const { data, error } = await supabase.auth.signInWithPassword({
+//           email: data.email,
+//           password: data.password,
+//         });
+//         if (error) throw error, console.log(data);
+//       } catch (error) {
+//         console.log(data), alert(error.error_description || error.message);
+//       }
+//     };
 
-      try {
-        const { error } = await supabase.auth.signInWithPassword({
-          email: data.email,
-          password: data.password,
-        });
-        if (error) throw error;
-      } catch (error) {
-        alert(error.error_description || error.message);
-      }
-    };
+//     const handleSignin = async () => {
+      
+//       let { data } = await supabase
+//       .from('profiles')
+//       .select(`password, email`)
 
-    return {
-      email,
-      password,
-      handleSignin,
-    };
-  },
-};
+    //   try {
+    //     const { error } = await supabase.auth.signInWithPassword({
+    //       email: data.email,
+    //       password: data.password,
+    //     });
+    //     if (error) throw error;
+    //   } catch (error) {
+    //     alert(error.error_description || error.message);
+    //   }
+    // };
+
+//     return {
+//       email,
+//       password,
+//       handleSignin,
+//     };
+//   },
+// };
 </script>
