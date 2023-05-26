@@ -1,22 +1,15 @@
 <script setup>
-import { setupCalendar, Calendar, DatePicker } from 'v-calendar';
+import VCalendar from 'v-calendar';
 import 'v-calendar/style.css';
-
-// Use plugin defaults (optional)
-app.use(setupCalendar, {})
-
-// Use the components
-app.component('VCalendar', Calendar)
-app.component('VDatePicker', DatePicker)
+// Use plugin with optional defaults
 
 </script>
 
 <template>
   <h1>Attendance</h1>
-<VCalendar />
+  <VCalendar />
   <VDatePicker v-model="date" />
   </template>
-  
   <style>
 .grid{
   display: grid;
