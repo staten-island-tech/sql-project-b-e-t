@@ -30,11 +30,6 @@
       <td>E</td>
       <td>0</td>
     </tr>
-    <tr>
-      <td>Lunch</td>
-      <td>F</td>
-      <td>0</td>
-    </tr>
   </table>
 </template>
 
