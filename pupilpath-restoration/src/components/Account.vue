@@ -112,8 +112,6 @@ async function signOut() {
       <input
         type="submit"
         class="button primary block"
-        :value="loading ? 'Loading ...' : 'Update'"
-        :disabled="loading"
       />
     </div>
 

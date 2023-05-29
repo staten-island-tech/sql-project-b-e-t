@@ -11,7 +11,7 @@
         <input id="password" type="password" v-model="password" />
       </div>
       <div>
-        <button type="submit" @submit.prevent="handleLogin">Sign in</button>
+        <button @click="login">Login</button>
       </div>
     </form>
   </div>
@@ -21,33 +21,47 @@
 import { ref } from "vue";
 import { supabase } from "../supabase";
 
+//let
 const email = ref('')
 const password = ref('')
 
-
-const handleLogin = async () => {
-  try {
-    loading.value = true
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email.value,
-      password: password.value,
-    })
-    if (error) throw error
-    alert('You successfully signed up!')
-    console.log(data)
-    console.log(error)
-    console.log("hi")
-  } catch (error) {
-    console.log("hi")
-    if (error instanceof Error) {
-      alert(error.message)
-      console.log("hi")
-
-    }
-  } finally {
-    loading.value = false
-  }
+async function login() {
+const { data, error } = await supabase.auth.signInWithPassword({
+  email: email.value,
+  password: password.value,
+})
+if (error) {
+  console.log(error)
 }
+else{
+  console.log(data)
+}
+}
+
+
+// const handleLogin = async () => {
+//   try {
+//     loading.value = true
+//     const { data, error } = await supabase.auth.signInWithPassword({
+//       email: email.value,
+//       password: password.value,
+//     })
+//     if (error) throw error
+//     alert('You successfully signed up!')
+//     console.log(data)
+//     console.log(error)
+//     console.log("hi")
+//   } catch (error) {
+//     console.log("hi")
+//     if (error instanceof Error) {
+//       alert(error.message)
+//       console.log("hi")
+
+//     }
+//   } finally {
+//     loading.value = false
+//   }
+// }
 
 // export default {
 //   setup() {
