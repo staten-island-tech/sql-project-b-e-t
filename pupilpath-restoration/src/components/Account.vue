@@ -8,9 +8,6 @@ const { session } = toRefs(props)
 const username = ref('')
 const first_name = ref('')
 const last_name = ref('')
-const avatar_url = ref('')
-const password = ref('')
-const email = ref('')
 
 onMounted(() => {
   getProfile()
@@ -22,7 +19,7 @@ async function getProfile() {
 
     let { data, error, status } = await supabase
       .from('profiles')
-      .select(`first_name, last_name, username, avatar_url, password, email`)
+      .select(`first_name, last_name, username`)
       .eq('id', user.id)
 
     if (error && status !== 406) throw error
@@ -31,9 +28,6 @@ async function getProfile() {
       username.value = data.username
       first_name.value = data.first_name
       last_name.value = data.last_name
-      avatar_url.value = data.avatar_url
-      password.value = data.password
-      email.value = data.email
     }
   } catch (error) {
     alert(error.message)
@@ -49,9 +43,6 @@ async function updateProfile() {
       username: username.value,
       first_name: first_name.value,
       last_name: last_name.value,
-      avatar_url: avatar_url.value,
-      password: password.value,
-      email: email.value,
     }
 
     let { error } = await supabase.from('profiles').upsert(updates)
@@ -70,14 +61,16 @@ async function signOut() {
     alert(error.message)
   } 
 }
+
+function clearInputs() {
+  email.value = ''
+  password.value = ''
+}
+
 </script>
 
 <template>
-  <form class="form-widget" @submit.prevent="updateProfile">
-    <div>
-      <label for="email">Email</label>
-      <input id="email" type="text" v-model="email"/>
-    </div>
+  <form class="form-widget" @click="updateProfile(), clearInputs()">
     <div>
       <label for="username">Username</label>
       <input id="username" type="text" v-model="username" />
@@ -91,14 +84,6 @@ async function signOut() {
       <input id="lastname" type="text" v-model="last_name" />
     </div>
     <div>
-      <label for="avatarurl">Avatar Url</label>
-      <input id="avatarurl" type="text" v-model="avatar_url" />
-    </div>
-    <div>
-      <label for="password">Password</label>
-      <input id="password" type="text" v-model="password" />
-    </div>
-    <div>
       <input
         type="submit"
         class="button primary block"
@@ -106,7 +91,7 @@ async function signOut() {
     </div>
 
     <div>
-      <button class="button block" @click="signOut">Sign Out</button>
+      <button class="button block" @click="signOut()">Sign Out</button>
     </div>
   </form>
 </template>

@@ -11,7 +11,7 @@
         <input id="password" type="password" v-model="password" />
       </div>
       <div>
-        <button @click="signUp">Sign Up</button>
+        <button @click="signUp(), clearInputs()" >Sign Up</button>
       </div>
   </div>
 </template>
@@ -29,11 +29,16 @@ const { data, error } = await supabase.auth.signUp({
   password: password.value,
 })
 if (error) {
-  console.log(error)
+  alert(error)
 }
 else{
   console.log(data)
 }
+}
+
+function clearInputs() {
+  email.value = ''
+  password.value = ''
 }
 
 </script>

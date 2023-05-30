@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h2>Sign in to your account!</h2>
-      <div>
+    <h2>Log in to your account!</h2>
+      <div> 
         <label for="email">Email</label>
         <input id="email" type="email" v-model="email" />
       </div>
@@ -10,7 +10,7 @@
         <input id="password" type="password" v-model="password" />
       </div>
       <div>
-        <button @click="login">Login</button>
+        <button @click="login(), clearInputs()">Login</button>
       </div>
   </div>
 </template>
@@ -28,11 +28,16 @@ const { data, error } = await supabase.auth.signInWithPassword({
   password: password.value,
 })
 if (error) {
-  console.log(error)
+alert(error)
 }
 else{
   console.log(data)
 }
+}
+
+function clearInputs() {
+  email.value = ''
+  password.value = ''
 }
 
 </script>
