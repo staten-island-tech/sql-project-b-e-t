@@ -1,14 +1,11 @@
 <script setup>
-import VCalendar from 'v-calendar';
-import 'v-calendar/style.css';
 // Use plugin with optional defaults
 
 </script>
 
 <template>
   <h1>Attendance</h1>
-  <VCalendar />
-  <VDatePicker v-model="date" />
+  <VDatePicker />
   </template>
   <style>
 .grid{
