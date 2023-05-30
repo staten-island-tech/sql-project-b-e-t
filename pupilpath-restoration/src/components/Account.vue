@@ -5,7 +5,6 @@ import { onMounted, ref, toRefs } from 'vue'
 const props = defineProps(['session'])
 const { session } = toRefs(props)
 
-const loading = ref(true)
 const username = ref('')
 const first_name = ref('')
 const last_name = ref('')
@@ -19,7 +18,6 @@ onMounted(() => {
 
 async function getProfile() {
   try {
-    loading.value = true
     const { user } = session.value
 
     let { data, error, status } = await supabase
@@ -39,14 +37,11 @@ async function getProfile() {
     }
   } catch (error) {
     alert(error.message)
-  } finally {
-    loading.value = false
-  }
+}
 }
 
 async function updateProfile() {
   try {
-    loading.value = true
     const { user } = session.value
 
     const updates = {
@@ -64,21 +59,16 @@ async function updateProfile() {
     if (error) throw error
   } catch (error) {
     alert(error.message)
-  } finally {
-    loading.value = false
   }
 }
 
 async function signOut() {
   try {
-    loading.value = true
     let { error } = await supabase.auth.signOut()
     if (error) throw error
   } catch (error) {
     alert(error.message)
-  } finally {
-    loading.value = false
-  }
+  } 
 }
 </script>
 
@@ -116,7 +106,7 @@ async function signOut() {
     </div>
 
     <div>
-      <button class="button block" @click="signOut" :disabled="loading">Sign Out</button>
+      <button class="button block" @click="signOut">Sign Out</button>
     </div>
   </form>
 </template>

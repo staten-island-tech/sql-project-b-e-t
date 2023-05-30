@@ -12,8 +12,6 @@
       </div>
       <div>
         <button @click="signUp">Sign Up</button>
-        <br>
-        <button @click="login">Login</button>
       </div>
   </div>
 </template>
@@ -22,7 +20,6 @@
 import { ref } from "vue";
 import { supabase } from "../supabase";
 
-//let
 const email = ref('')
 const password = ref('')
 
@@ -39,16 +36,4 @@ else{
 }
 }
 
-async function login() {
-const { data, error } = await supabase.auth.signInWithPassword({
-  email: email.value,
-  password: password.value,
-})
-if (error) {
-  console.log(error)
-}
-else{
-  console.log(data)
-}
-}
 </script>
