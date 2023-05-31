@@ -3,7 +3,6 @@ import { onMounted, ref } from 'vue'
 import Account from '../components/Account.vue'
 import SignIn from '../components/SignIn.vue'
 import { supabase } from '../supabase'
-
 const session = ref()
 
 onMounted(() => {

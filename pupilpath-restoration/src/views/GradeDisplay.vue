@@ -1,3 +1,32 @@
+<script>
+const username = ref('')
+const first_name = ref('')
+const last_name = ref('')
+const avatar_url = ref('')
+const password = ref('')
+const email = ref('')
+async function updateProfile() {
+  try {
+    const { user } = session.value
+
+    const updates = {
+      id: user.id,
+      username: username.value,
+      first_name: first_name.value,
+      last_name: last_name.value,
+      avatar_url: avatar_url.value,
+      password: password.value,
+      email: email.value
+    }
+
+    let { error } = await supabase.from('profiles').upsert(updates)
+
+    if (error) throw error
+  } catch (error) {
+    alert(error.message)
+  }
+}
+</script>
 <template>
   <table>
     <tr>
@@ -6,9 +35,9 @@
       <th>Grade</th>
     </tr>
     <tr>
-      <td>Alfreds Futterkiste</td>
+      <td>English</td>
       <td>Maria Anders</td>
-      <td>Germany</td>
+      <td><input id="firstname" type="text" v-model="english_grade" /></td>
     </tr>
     <tr>
       <td>Centro comercial Moctezuma</td>
