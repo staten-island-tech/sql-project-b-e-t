@@ -20,7 +20,7 @@ const router = createRouter({
     {
       path: '/grades',
       name: 'Grades',
-      component: () => import('../views/GradeDisplay.vue')
+      component: () => import('../views/GradeDisplayView.vue')
     }
   ]
 })

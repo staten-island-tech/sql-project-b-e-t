@@ -1,10 +1,10 @@
-<script>
-const username = ref('')
-const first_name = ref('')
-const last_name = ref('')
-const avatar_url = ref('')
-const password = ref('')
-const email = ref('')
+<script setup>
+// const username = ref('')
+// const first_name = ref('')
+// const last_name = ref('')
+// const avatar_url = ref('')
+// const password = ref('')
+// const email = ref('')
 async function updateProfile() {
   try {
     const { user } = session.value
