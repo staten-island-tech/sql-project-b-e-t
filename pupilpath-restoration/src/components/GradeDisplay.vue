@@ -1,10 +1,10 @@
 <script setup>
-// const username = ref('')
-// const first_name = ref('')
-// const last_name = ref('')
-// const avatar_url = ref('')
-// const password = ref('')
-// const email = ref('')
+const username = ref('')
+const first_name = ref('')
+const last_name = ref('')
+const avatar_url = ref('')
+const password = ref('')
+const email = ref('')
 async function updateProfile() {
   try {
     const { user } = session.value
@@ -19,7 +19,7 @@ async function updateProfile() {
       email: email.value
     }
 
-    let { error } = await supabase.from('profiles').upsert(updates)
+    let { error } = await supabase.from('grades').upsert(updates)
 
     if (error) throw error
   } catch (error) {
