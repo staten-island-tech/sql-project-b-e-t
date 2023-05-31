@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import Auth from '../components/Auth.vue'
 import GradeDisplay from '../components/GradeDisplay.vue'
 import { supabase } from '../supabase'
 
