@@ -1,6 +1,6 @@
 <script setup>
 import { supabase } from '../supabase'
-import { ref, toRefs } from 'vue'
+import { ref, toRefs, onMounted } from 'vue'
 
 const props = defineProps(['session'])
 const { session } = toRefs(props)
@@ -9,6 +9,13 @@ const english_grade = ref('')
 const math_grade = ref('')
 const science_grade = ref('')
 const history_grade = ref('')
+
+const grades = ref([])
+
+async function getGrades() {
+  const { data } = await supabase.from('grades').select()
+  grades.value = data
+}
 
 async function updateProfile() {
   try {
@@ -28,6 +35,9 @@ async function updateProfile() {
     alert(error.message)
   }
 }
+onMounted(() => {
+  getGrades()
+})
 </script>
 <template>
   <table>
@@ -40,7 +50,7 @@ async function updateProfile() {
     <tr>
       <td>English</td>
       <td>Maria Anders</td>
-      <th>Current Grade</th>
+      <th>Current</th>
       <td><input id="EnglishGrade" type="text" v-model="english_grade" /></td>
     </tr>
     <tr>
@@ -62,6 +72,7 @@ async function updateProfile() {
       <td><input id="HistoryGrade" type="text" v-model="history_grade" /></td>
     </tr>
     <button @click="updateProfile">Update</button>
+    <li v-for="grade in grades" :key="grade.id">{{ grade.value }}</li>
   </table>
 </template>
 
