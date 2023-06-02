@@ -1,12 +1,20 @@
 <script setup>
 // Use plugin with optional defaults
+import { ref } from 'vue';
+
+const attributes = ref([
+  {
+    highlight: true
+  },
+]);
 
 </script>
 
 <template>
   <h1>Attendance</h1>
-  <VDatePicker />
+  <VDatePicker :attributes="attributes" />
   </template>
+  
   <style>
 .grid{
   display: grid;
