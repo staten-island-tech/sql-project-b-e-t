@@ -1,20 +1,34 @@
-<script setup>
-// Use plugin with optional defaults
-import { ref } from 'vue';
+<template>
+  <VCalendar :attributes="attributes" />
+</template>
 
-const attributes = ref([
+<script setup>
+import { ref, computed } from 'vue';
+
+const todos = ref([
   {
-    highlight: true
+    description: 'Take Noah to basketball practice.',
+    isComplete: false,
+    dates: { weekdays: 6 }, // Every Friday
+    color: 'red',
   },
 ]);
 
+const attributes = computed(() => [
+  // Attributes for todos
+  ...todos.value.map(todo => ({
+    dates: todo.dates,
+    dot: {
+      color: todo.color,
+      class: todo.isComplete ? 'opacity-75' : '',
+    },
+    popover: {
+      label: todo.description,
+    },
+  })),
+]);
 </script>
 
-<template>
-  <h1>Attendance</h1>
-  <VDatePicker :attributes="attributes" />
-  </template>
-  
   <style>
 .grid{
   display: grid;
