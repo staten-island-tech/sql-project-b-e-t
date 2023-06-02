@@ -1,24 +1,26 @@
 <script setup>
-const username = ref('')
-const first_name = ref('')
-const last_name = ref('')
-const avatar_url = ref('')
-const password = ref('')
-const email = ref('')
+import { supabase } from '../supabase'
+import { ref, toRefs } from 'vue'
+
+const props = defineProps(['session'])
+const { session } = toRefs(props)
+
+const english_grade = ref('')
+const math_grade = ref('')
+const science_grade = ref('')
+const history_grade = ref('')
+
 async function updateProfile() {
   try {
     const { user } = session.value
 
     const updates = {
       id: user.id,
-      username: username.value,
-      first_name: first_name.value,
-      last_name: last_name.value,
-      avatar_url: avatar_url.value,
-      password: password.value,
-      email: email.value
+      English: english_grade.value,
+      Math: math_grade.value,
+      Science: science_grade.value,
+      History: history_grade.value
     }
-
     let { error } = await supabase.from('grades').upsert(updates)
 
     if (error) throw error
@@ -32,38 +34,34 @@ async function updateProfile() {
     <tr>
       <th>Subject</th>
       <th>Teacher</th>
-      <th>Grade</th>
+      <th>Current Grade</th>
+      <th>New Grade</th>
     </tr>
     <tr>
       <td>English</td>
       <td>Maria Anders</td>
-      <td><input id="firstname" type="text" v-model="english_grade" /></td>
+      <th>Current Grade</th>
+      <td><input id="EnglishGrade" type="text" v-model="english_grade" /></td>
     </tr>
     <tr>
-      <td>Centro comercial Moctezuma</td>
+      <td>Math</td>
       <td>Francisco Chang</td>
-      <td>Mexico</td>
+      <th>Current Grade</th>
+      <td><input id="MathGrade" type="text" v-model="math_grade" /></td>
     </tr>
     <tr>
-      <td>Ernst Handel</td>
+      <td>Science</td>
       <td>Roland Mendel</td>
-      <td>Austria</td>
+      <th>Current Grade</th>
+      <td><input id="ScienceGrade" type="text" v-model="science_grade" /></td>
     </tr>
     <tr>
-      <td>Island Trading</td>
+      <td>History</td>
       <td>Helen Bennett</td>
-      <td>UK</td>
+      <th>Current Grade</th>
+      <td><input id="HistoryGrade" type="text" v-model="history_grade" /></td>
     </tr>
-    <tr>
-      <td>Laughing Bacchus Winecellars</td>
-      <td>Yoshi Tannamuri</td>
-      <td>Canada</td>
-    </tr>
-    <tr>
-      <td>Magazzini Alimentari Riuniti</td>
-      <td>Giovanni Rovelli</td>
-      <td>Italy</td>
-    </tr>
+    <button @click="updateProfile">Update</button>
   </table>
 </template>
 
