@@ -31,7 +31,7 @@ async function getProfile() {
     }
   } catch (error) {
     alert(error.message)
-}
+  }
 }
 
 async function updateProfile() {
@@ -42,7 +42,7 @@ async function updateProfile() {
       id: user.id,
       username: username.value,
       first_name: first_name.value,
-      last_name: last_name.value,
+      last_name: last_name.value
     }
 
     let { error } = await supabase.from('profiles').upsert(updates)
@@ -53,20 +53,30 @@ async function updateProfile() {
   }
 }
 
+async function displayName() {
+  try {
+    const { user } = session.value
+    const { data, error } = await supabase.from('profiles').select('id', user.id)
+    if (error) throw error
+    console.log(data)
+  } catch (error) {
+    alert(error.message)
+  }
+}
+displayName()
 async function signOut() {
   try {
     let { error } = await supabase.auth.signOut()
     if (error) throw error
   } catch (error) {
     alert(error.message)
-  } 
+  }
 }
 
 function clearInputs() {
   email.value = ''
   password.value = ''
 }
-
 </script>
 
 <template>
@@ -84,10 +94,7 @@ function clearInputs() {
       <input id="lastname" type="text" v-model="last_name" />
     </div>
     <div>
-      <input
-        type="submit"
-        class="button primary block"
-      />
+      <input type="submit" class="button primary block" />
     </div>
 
     <div>
