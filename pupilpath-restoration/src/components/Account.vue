@@ -56,9 +56,11 @@ async function updateProfile() {
 async function displayName() {
   try {
     const { user } = session.value
-    const { data, error } = await supabase.from('profiles').select('id', user.id)
+    const { data, error } = await supabase.from('profiles').select().eq('id', user.id)
     if (error) throw error
     console.log(data)
+    console.log(data[0].first_name)
+    console.log(data[0].last_name)
   } catch (error) {
     alert(error.message)
   }
@@ -100,5 +102,6 @@ function clearInputs() {
     <div>
       <button class="button block" @click="signOut()">Sign Out</button>
     </div>
+    <div v-for="data in data" :key="data.id"> {{ data.first_name  }} </div>
   </form>
 </template>
