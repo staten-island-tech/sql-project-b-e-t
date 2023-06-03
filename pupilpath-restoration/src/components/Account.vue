@@ -8,7 +8,7 @@ const { session } = toRefs(props)
 const username = ref('')
 const first_name = ref('')
 const last_name = ref('')
-
+const data = ref([])
 onMounted(() => {
   getProfile()
 })
@@ -56,11 +56,9 @@ async function updateProfile() {
 async function displayName() {
   try {
     const { user } = session.value
-    const { data, error } = await supabase.from('profiles').select().eq('id', user.id)
+    const { data: userData, error } = await supabase.from('profiles').select().eq('id', user.id)
     if (error) throw error
-    console.log(data)
-    console.log(data[0].first_name)
-    console.log(data[0].last_name)
+    data.value = userData
   } catch (error) {
     alert(error.message)
   }
@@ -102,6 +100,6 @@ function clearInputs() {
     <div>
       <button class="button block" @click="signOut()">Sign Out</button>
     </div>
-    <div v-for="data in data" :key="data.id"> {{ data.first_name  }} </div>
+    <div v-for="data in data" :key="data.id"> Welcome, {{ data.first_name  }} to "pupilpath" </div>
   </form>
 </template>
