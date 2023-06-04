@@ -64,23 +64,19 @@ async function displayName() {
   }
 }
 displayName()
-async function signOut() {
-  try {
-    let { error } = await supabase.auth.signOut()
-    if (error) throw error
-  } catch (error) {
-    alert(error.message)
-  }
-}
 
+function updateProfileclearInputs() {
+  updateProfile()
+  clearInputs()
+}
 function clearInputs() {
-  email.value = ''
-  password.value = ''
+  username.value = ''
+  first_name.value = ''
+  last_name.value = ''
 }
 </script>
 
 <template>
-  <form class="form-widget" @click="updateProfile(), clearInputs()">
     <div>
       <label for="username">Username</label>
       <input id="username" type="text" v-model="username" />
@@ -94,12 +90,7 @@ function clearInputs() {
       <input id="lastname" type="text" v-model="last_name" />
     </div>
     <div>
-      <input type="submit" class="button primary block" />
+      <button class="button block" @click="updateProfileclearInputs">Update</button>
     </div>
-
-    <div>
-      <button class="button block" @click="signOut()">Sign Out</button>
-    </div>
-    <div v-for="data in data" :key="data.id"> Welcome, {{ data.first_name  }} to "pupilpath" </div>
-  </form>
+    <div v-for="data in data" :key="data.id"> Welcome, {{ data.first_name  }}, to "pupilpath" </div>
 </template>
