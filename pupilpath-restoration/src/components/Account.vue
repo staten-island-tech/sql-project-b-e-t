@@ -8,7 +8,7 @@ const { session } = toRefs(props)
 const username = ref('')
 const first_name = ref('')
 const last_name = ref('')
-
+const data = ref([])
 onMounted(() => {
   getProfile()
 })
@@ -31,7 +31,7 @@ async function getProfile() {
     }
   } catch (error) {
     alert(error.message)
-}
+  }
 }
 
 async function updateProfile() {
@@ -42,7 +42,7 @@ async function updateProfile() {
       id: user.id,
       username: username.value,
       first_name: first_name.value,
-      last_name: last_name.value,
+      last_name: last_name.value
     }
 
     let { error } = await supabase.from('profiles').upsert(updates)
@@ -53,24 +53,30 @@ async function updateProfile() {
   }
 }
 
-async function signOut() {
+async function displayName() {
   try {
-    let { error } = await supabase.auth.signOut()
+    const { user } = session.value
+    const { data: userData, error } = await supabase.from('profiles').select().eq('id', user.id)
     if (error) throw error
+    data.value = userData
   } catch (error) {
     alert(error.message)
-  } 
+  }
 }
+displayName()
 
+function updateProfileclearInputs() {
+  updateProfile()
+  clearInputs()
+}
 function clearInputs() {
-  email.value = ''
-  password.value = ''
+  username.value = ''
+  first_name.value = ''
+  last_name.value = ''
 }
-
 </script>
 
 <template>
-  <form class="form-widget" @click="updateProfile(), clearInputs()">
     <div>
       <label for="username">Username</label>
       <input id="username" type="text" v-model="username" />
@@ -84,14 +90,7 @@ function clearInputs() {
       <input id="lastname" type="text" v-model="last_name" />
     </div>
     <div>
-      <input
-        type="submit"
-        class="button primary block"
-      />
+      <button class="button block" @click="updateProfileclearInputs">Update</button>
     </div>
-
-    <div>
-      <button class="button block" @click="signOut()">Sign Out</button>
-    </div>
-  </form>
+    <div v-for="data in data" :key="data.id"> Welcome, {{ data.first_name  }}, to "pupilpath" </div>
 </template>
