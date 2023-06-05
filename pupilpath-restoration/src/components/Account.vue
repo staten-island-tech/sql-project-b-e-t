@@ -65,15 +65,19 @@ async function displayName() {
 }
 displayName()
 
-function updateProfileclearInputs() {
-  updateProfile()
-  clearInputs()
-}
-function clearInputs() {
+async function clearInputs() {
   username.value = ''
   first_name.value = ''
   last_name.value = ''
 }
+
+async function updateProfileclearInputs() {
+  await updateProfile()
+  await displayName()
+  await clearInputs()
+  getProfile()
+}
+
 </script>
 
 <template>

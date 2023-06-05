@@ -42,16 +42,17 @@ async function getGrades() {
   }
 }
 getGrades()
-function clearInputs() {
+async function clearInputs() {
   english_grade.value = ''
   math_grade.value = ''
   science_grade.value = ''
   history_grade.value = ''
 }
 
-function updateProfileClearInputs() {
-updateProfile()
-clearInputs()
+async function updateProfileClearInputs() {
+  await updateProfile()
+  await clearInputs()
+  getGrades()
 }
 </script>
 <template>
