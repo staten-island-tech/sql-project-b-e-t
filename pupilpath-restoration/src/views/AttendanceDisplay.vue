@@ -1,55 +1,93 @@
 <template>
-  <VCalendar :attributes="attributes" />
+  <VDatePicker v-model="date" mode="date" is-required :attributes="attributes" />
+  <div>
+    <label class="text" for="dateSelected">Date Selected</label>
+    <br>
+    <label id="dateSelected">{{ cleanDate }}</label>
+    <br>
+    <br>
+    <label class="text" for="attendance">Mark the day as:</label>
+    <br>
+    <button class="green" id="attendance" value="present"
+      @click="markAttendance('green', date, 'Present')">Present</button>
+    <button class="yellow" id="attendance" value="tardy" @click="markAttendance('#ca8a04', date, 'Tardy')">Tardy</button>
+    <button class="red" id="attendance" value="absent" @click="markAttendance('red', date, 'Absent')">Absent</button>
+    <button @click="clearAttendance(date)">Clear Attendance</button>
+
+  </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
+const date = ref(new Date());
 
-const todos = ref([
-  {
-    description: 'Take Noah to basketball practice.',
-    isComplete: false,
-    dates: { weekdays: 6 }, // Every Friday
-    color: 'red',
-  },
-]);
+let cleanDate = date.value.toString().split(" ").slice(0, 4).join(" ");;
+//Listens for date clicks
+addEventListener("click", () => { });
+onclick = () => {
+  //Get clean date from clicked date
+  cleanDate = date.value.toString().split(" ").slice(0, 4).join(" ");
+  console.log(cleanDate);
+  document.getElementById("dateSelected").innerHTML = cleanDate;
+};
 
-const attributes = computed(() => [
-  // Attributes for todos
-  ...todos.value.map(todo => ({
-    dates: todo.dates,
-    dot: {
-      color: todo.color,
-      class: todo.isComplete ? 'opacity-75' : '',
-    },
-    popover: {
-      label: todo.description,
-    },
-  })),
-]);
-</script>
 
-  <style>
-.grid{
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto;
-  background-color: #2196F3;
-  padding: 10px;
+let attributes = ref([])
+
+async function markAttendance(value, date, attendance) {
+  try {
+    //check if selected date is not already in list of attributes
+    for (const attrs in attributes.value) {
+      if (attributes.value[attrs].dates == date.toDateString()) {
+        alert("Date already marked");
+        return;
+      }
+    }
+    const newAttr = {
+      bar: value,
+      dates: date.toDateString(),
+      popover: {
+        label: attendance,
+        visibility: "hover",
+        placement: "top",
+        showPointer: true,
+        showArrow: true,
+      },
+    }
+    attributes.value.push(newAttr);
+    console.log(date.toDateString());
+    console.log(attributes.value);
+  }
+  catch (error) {
+    alert(error.message);
+  }
 }
-.grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
-}
 
-  @media (min-width: 1024px) {
-    .about {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
+function clearAttendance(date) {
+  for (const attrs in attributes.value) {
+    if (attributes.value[attrs].dates == date.toDateString()) {
+      delete attributes.value[attrs];
     }
   }
-  </style>
-  
+
+}
+
+</script>
+
+<style>
+.text {
+  font-size: 20px;
+}
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color:#ca8a04;
+}
+
+.red {
+  background-color: red;
+}
+</style>
