@@ -107,7 +107,7 @@ async function getAttributes() {
 
     let { data, error, status } = await supabase
       .from('attendance')
-      .select(attributes)
+      .select(`attributes`)
       .eq('id', user.id)
 
     if (error && status !== 406) throw error
