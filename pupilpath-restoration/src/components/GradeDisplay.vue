@@ -1,6 +1,6 @@
 <script setup>
 import { supabase } from '../supabase'
-import { ref, toRefs } from 'vue'
+import { ref, toRefs, onMounted } from 'vue'
 
 const props = defineProps(['session'])
 const { session } = toRefs(props)
