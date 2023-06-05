@@ -9,7 +9,7 @@ const english_grade = ref('')
 const math_grade = ref('')
 const science_grade = ref('')
 const history_grade = ref('')
-
+const data = ref([])
 async function updateProfile() {
   try {
     const { user } = session.value
@@ -28,6 +28,31 @@ async function updateProfile() {
     alert(error.message)
   }
 }
+
+async function getGrades() {
+  try {
+    const { user } = session.value
+    const { data: userData, error } = await supabase.from('grades').select().eq('id', user.id)
+    if (error) throw error
+    data.value = userData
+    console.log(userData)
+  }
+  catch (error) {
+    alert(error.message)
+  }
+}
+getGrades()
+function clearInputs() {
+  english_grade.value = ''
+  math_grade.value = ''
+  science_grade.value = ''
+  history_grade.value = ''
+}
+
+function updateProfileClearInputs() {
+updateProfile()
+clearInputs()
+}
 </script>
 <template>
   <table>
@@ -40,28 +65,28 @@ async function updateProfile() {
     <tr>
       <td>English</td>
       <td>Maria Anders</td>
-      <th>Current Grade</th>
+      <th v-for="data in data" :key="data.id">{{ data.English }}</th>
       <td><input id="EnglishGrade" type="text" v-model="english_grade" /></td>
     </tr>
     <tr>
       <td>Math</td>
       <td>Francisco Chang</td>
-      <th>Current Grade</th>
+      <th v-for="data in data" :key="data.id">{{ data.Math }}</th>
       <td><input id="MathGrade" type="text" v-model="math_grade" /></td>
     </tr>
     <tr>
       <td>Science</td>
       <td>Roland Mendel</td>
-      <th>Current Grade</th>
+      <th v-for="data in data" :key="data.id">{{ data.Science }}</th>
       <td><input id="ScienceGrade" type="text" v-model="science_grade" /></td>
     </tr>
     <tr>
       <td>History</td>
       <td>Helen Bennett</td>
-      <th>Current Grade</th>
+      <th v-for="data in data" :key="data.id">{{ data.History }}</th>
       <td><input id="HistoryGrade" type="text" v-model="history_grade" /></td>
     </tr>
-    <button @click="updateProfile">Update</button>
+    <button @click="updateProfileClearInputs()">Update</button>
   </table>
 </template>
 

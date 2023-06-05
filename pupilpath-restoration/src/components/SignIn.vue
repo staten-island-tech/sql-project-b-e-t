@@ -10,7 +10,7 @@
       <input id="password" type="password" v-model="password" />
     </div>
     <div>
-      <button @click="login">Login</button>
+      <button @click="loginClearInputs">Login</button>
     </div>
   </div>
 </template>
@@ -32,5 +32,15 @@ async function login() {
   } else {
     console.log(data)
   }
+}
+
+function clearInputs() {
+  email.value = ""
+  password.value = ""
+}
+
+function loginClearInputs(){
+  login()
+  clearInputs()
 }
 </script>

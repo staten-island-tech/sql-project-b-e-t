@@ -10,7 +10,7 @@
       <input id="password" type="password" v-model="password" />
     </div>
     <div>
-      <button @click="signUp(), clearInputs()">Sign Up</button>
+      <button @click="signUpClearInputs()">Sign Up</button>
     </div>
   </div>
 </template>
@@ -37,5 +37,10 @@ async function signUp() {
 function clearInputs() {
   email.value = ''
   password.value = ''
+}
+
+function signUpClearInputs() {
+  signUp()
+  clearInputs()
 }
 </script>
