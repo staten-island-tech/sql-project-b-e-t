@@ -23,9 +23,9 @@ const router = createRouter({
       component: () => import('../views/GradeDisplayView.vue')
     },
     {
-      path: '/attendance',
+      path: '/Attendance',
       name: 'Attendance',
-      component: () => import('../views/Attendance.vue')
+      component: () => import('../views/AttendanceDisplay.vue')
     }
   ]
 })

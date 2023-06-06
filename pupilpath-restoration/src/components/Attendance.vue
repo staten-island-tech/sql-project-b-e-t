@@ -113,7 +113,7 @@
       if (error && status !== 406) throw error
   
       if (data) {
-        console.log(data.attributes)
+        console.log(data)
         attributes.value = data.attributes
       }
     } catch (error) {
