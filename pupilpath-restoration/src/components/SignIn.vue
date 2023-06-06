@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Create an account!</h2>
+    <h2>Log in to your account!</h2>
     <div>
       <label for="email">Email</label>
       <input id="email" type="email" v-model="email" />
@@ -10,7 +10,7 @@
       <input id="password" type="password" v-model="password" />
     </div>
     <div>
-      <button @click="signUpClearInputs()">Sign Up</button>
+      <button @click="loginClearInputs">Login</button>
     </div>
   </div>
 </template>
@@ -22,25 +22,25 @@ import { supabase } from '../supabase'
 const email = ref('')
 const password = ref('')
 
-async function signUp() {
-  const { error } = await supabase.auth.signUp({
+async function login() {
+  const { data, error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value
   })
   if (error) {
-    alert(error)
+    console.log(error)
   } else {
-    alert('Check your email')
+    console.log(data)
   }
 }
 
 function clearInputs() {
-  email.value = ''
-  password.value = ''
+  email.value = ""
+  password.value = ""
 }
 
-function signUpClearInputs() {
-  signUp()
+function loginClearInputs(){
+  login()
   clearInputs()
 }
 </script>
