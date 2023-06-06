@@ -38,9 +38,8 @@ async function signOut() {
     >
     <RouterLink to="/Login" draggable="false" class="router" v-else>Log In</RouterLink>
     <RouterLink to="/Grades" draggable="false" class="router" false>Grades</RouterLink>
-    <button class="button block" @click="signOut" v-if="session" :session="session">
-      Sign Out
-    </button>
+    <RouterLink to="/Attendance" draggable="false" class="router" false>Attendance</RouterLink>
+    <button class="button block" @click="signOut" v-if="session" :session="session">Sign Out</button>
     <RouterView />
   </div>
 </template>

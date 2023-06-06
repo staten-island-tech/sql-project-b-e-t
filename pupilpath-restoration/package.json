@@ -10,8 +10,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@supabase/supabase-js": "^2.21.0",
     "pinia": "^2.0.35",
+    "v-calendar": "^3.0.3",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
