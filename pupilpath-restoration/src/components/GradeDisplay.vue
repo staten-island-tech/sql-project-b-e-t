@@ -85,7 +85,12 @@ async function updateProfileClearInputs() {
       <td>History</td>
       <td>Helen Bennett</td>
       <th v-for="data in data" :key="data.id">{{ data.History }}</th>
-      <td><input id="HistoryGrade" type="text" v-model="history_grade" /></td>
+      <td><input id="HistoryGrade" type="text" v-model="history_grade"/></td>
+    </tr>
+    <tr>
+      <td>Average
+        <td v-for="data in data" :key="data.id">{{ (data.History + data.Science + data.Math + data.English)/4}}</td>
+      </td>
     </tr>
     <button @click="updateProfileClearInputs()">Update</button>
   </table>
