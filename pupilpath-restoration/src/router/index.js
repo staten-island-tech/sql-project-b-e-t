@@ -21,6 +21,11 @@ const router = createRouter({
       path: '/grades',
       name: 'Grades',
       component: () => import('../views/GradeDisplayView.vue')
+    },
+    {
+      path: '/attendance',
+      name: 'Attendance',
+      component: () => import('../views/Attendance.vue')
     }
   ]
 })
