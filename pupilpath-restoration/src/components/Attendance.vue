@@ -112,10 +112,15 @@
   
       if (error && status !== 406) throw error
   
-      if (data) {
-        console.log(data)
-        attributes.value = data.attributes
-      }
+      // if (data) {
+      //   console.log(data)
+      //   attributes.value = data.attributes
+        
+      // }
+      if (data && data.length > 0) {
+      console.log(data)
+      attributes.value.splice(0, attributes.value.length, data[0].attributes)
+    }
     } catch (error) {
       alert(error.message)
     }
