@@ -1,16 +1,23 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import GradeDisplay from '../components/GradeDisplay.vue'
-import { session, useSessionStore } from '../stores/store.js';
+import { supabase } from '../supabase'
 
-const sessionStore = useSessionStore();
-onMounted(async () => {
-  await sessionStore.sessionCheck();
+const session = ref()
+
+onMounted(() => {
+  supabase.auth.getSession().then(({ data }) => {
+    session.value = data.session
+  })
+
+  supabase.auth.onAuthStateChange((_, _session) => {
+    session.value = _session
+  })
 })
 </script>
 <template>
   <div class="container" style="padding: 50px 0 100px 0">
     <GradeDisplay v-if="session" :session="session" />
-    <div v-else style="background-color: white;">Log in before you can access your grades!</div>
+    <div v-else>Log in before you can access your grades!</div>
   </div>
 </template>
