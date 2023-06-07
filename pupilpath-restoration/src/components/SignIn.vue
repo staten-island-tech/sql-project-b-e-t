@@ -35,12 +35,18 @@ async function login() {
 }
 
 function clearInputs() {
-  email.value = ""
-  password.value = ""
+  email.value = ''
+  password.value = ''
 }
 
-function loginClearInputs(){
+function loginClearInputs() {
   login()
   clearInputs()
 }
 </script>
+<style scoped>
+div {
+  background-color: rgb(240, 240, 240);
+  padding: 10px;
+}
+</style>

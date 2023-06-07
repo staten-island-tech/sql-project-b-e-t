@@ -96,11 +96,16 @@ async function updateProfileClearInputs() {
   </table>
 </template>
 
-<style>
+<style scoped>
+div {
+  background-color: rgb(240, 240, 240);
+  padding: 10px;
+}
 td,
 th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+  background-color: rgb(240, 240, 240);
 }
 </style>

@@ -77,24 +77,29 @@ async function updateProfileclearInputs() {
   await clearInputs()
   getProfile()
 }
-
 </script>
 
 <template>
-    <div>
-      <label for="username">Username</label>
-      <input id="username" type="text" v-model="username" />
-    </div>
-    <div>
-      <label for="firstname">First Name</label>
-      <input id="firstname" type="text" v-model="first_name" />
-    </div>
-    <div>
-      <label for="lastname">Last Name</label>
-      <input id="lastname" type="text" v-model="last_name" />
-    </div>
-    <div>
-      <button class="button block" @click="updateProfileclearInputs">Update</button>
-    </div>
-    <div v-for="data in data" :key="data.id"> Welcome, {{ data.first_name  }}, to "pupilpath" </div>
+  <div class="box">
+    <label for="username">Username</label>
+    <input id="username" type="text" v-model="username" />
+  </div>
+  <div>
+    <label for="firstname">First Name</label>
+    <input id="firstname" type="text" v-model="first_name" />
+  </div>
+  <div>
+    <label for="lastname">Last Name</label>
+    <input id="lastname" type="text" v-model="last_name" />
+  </div>
+  <div>
+    <button class="button block" @click="updateProfileclearInputs">Update</button>
+  </div>
+  <div v-for="data in data" :key="data.id">Welcome, {{ data.first_name }}, to "pupilpath"</div>
 </template>
+<style scoped>
+div {
+  background-color: rgb(240, 240, 240);
+  padding: 10px;
+}
+</style>

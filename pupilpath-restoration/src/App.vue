@@ -39,7 +39,9 @@ async function signOut() {
     <RouterLink to="/Login" draggable="false" class="router" v-else>Log In</RouterLink>
     <RouterLink to="/Grades" draggable="false" class="router" false>Grades</RouterLink>
     <RouterLink to="/Attendance" draggable="false" class="router" false>Attendance</RouterLink>
-    <button class="button block" @click="signOut" v-if="session" :session="session">Sign Out</button>
+    <button class="button block" @click="signOut" v-if="session" :session="session">
+      Sign Out
+    </button>
     <RouterView />
   </div>
 </template>
@@ -50,9 +52,6 @@ async function signOut() {
 .router {
   border: 10px;
   padding: 10px;
-}
-body {
-  background-color: white;
-  background-image: linear-gradient(to left, purple, blue);
+  background-color: rgb(240, 240, 240);
 }
 </style>

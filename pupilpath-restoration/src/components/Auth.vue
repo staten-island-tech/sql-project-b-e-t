@@ -2,11 +2,11 @@
   <div>
     <h2>Create an account!</h2>
     <div>
-      <label for="email">Email</label>
+      <label for="email">Email: </label>
       <input id="email" type="email" v-model="email" />
     </div>
     <div>
-      <label for="password">Password</label>
+      <label for="password">Password: </label>
       <input id="password" type="password" v-model="password" />
     </div>
     <div>
@@ -44,3 +44,10 @@ function signUpClearInputs() {
   clearInputs()
 }
 </script>
+<style scoped>
+div {
+  align-content: center;
+  padding: 10px;
+  background-color: rgb(240, 240, 240);
+}
+</style>
