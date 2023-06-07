@@ -81,15 +81,15 @@ async function updateProfileclearInputs() {
 
 <template>
   <div class="box">
-    <label for="username">Username</label>
+    <label for="username">Username </label>
     <input id="username" type="text" v-model="username" />
   </div>
   <div>
-    <label for="firstname">First Name</label>
+    <label for="firstname">First Name </label>
     <input id="firstname" type="text" v-model="first_name" />
   </div>
   <div>
-    <label for="lastname">Last Name</label>
+    <label for="lastname">Last Name </label>
     <input id="lastname" type="text" v-model="last_name" />
   </div>
   <div>

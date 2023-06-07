@@ -1,19 +1,12 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import Account from '../components/Account.vue'
 import Auth from '../components/Auth.vue'
-import { supabase } from '../supabase'
+import { session, useSessionStore } from '../stores/store.js';
 
-const session = ref()
-
-onMounted(() => {
-  supabase.auth.getSession().then(({ data }) => {
-    session.value = data.session
-  })
-
-  supabase.auth.onAuthStateChange((_, _session) => {
-    session.value = _session
-  })
+const sessionStore = useSessionStore();
+onMounted(async () => {
+  await sessionStore.sessionCheck();
 })
 </script>
 <template>
