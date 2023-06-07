@@ -1,23 +1,17 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import Attendance from '../components/Attendance.vue'
-import { supabase } from '../supabase'
+import { useSessionStore } from '../stores/store.js';
 
-const session = ref()
-
-onMounted(() => {
-  supabase.auth.getSession().then(({ data }) => {
-    session.value = data.session
-  })
-
-  supabase.auth.onAuthStateChange((_, _session) => {
-    session.value = _session
-  })
+const sessionStore = useSessionStore();
+onMounted(async () => {
+  await sessionStore.sessionCheck();
 })
 </script>
 <template>
   <div class="container" style="padding: 50px 0 100px 0">
-    <Attendance v-if="session" :session="session" />
-    <div v-else>Log in before you can access your attendance!</div>
+    <Attendance v-if="sessionStore.session" :session="sessionStore.session" />
+    <div v-else style="background-color: white">Log in before you can access your attendance!</div>
   </div>
 </template>
+<style scoped></style>

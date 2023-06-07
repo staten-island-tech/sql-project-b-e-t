@@ -1,18 +1,14 @@
 <script setup>
-import { supabase } from './supabase'
 import { RouterLink, RouterView } from 'vue-router'
-import { onMounted, ref } from 'vue'
-const session = ref()
+import { onMounted } from 'vue'
+import { useSessionStore } from './stores/store.js';
+import { supabase } from './supabase'
 
-onMounted(() => {
-  supabase.auth.getSession().then(({ data }) => {
-    session.value = data.session
-  })
-
-  supabase.auth.onAuthStateChange((_, _session) => {
-    session.value = _session
-  })
+const sessionStore = useSessionStore();
+onMounted(async () => {
+  await sessionStore.sessionCheck();
 })
+
 async function signOut() {
   try {
     let { error } = await supabase.auth.signOut()
@@ -21,25 +17,18 @@ async function signOut() {
     alert(error.message)
   }
 }
+
 </script>
 
 <template>
   <div id="container" false>
-    <RouterLink
-      to="/"
-      draggable="false"
-      class="router"
-      v-if="session"
-      :session="session"
-    ></RouterLink>
+    <RouterLink to="/" draggable="false" class="router" v-if="sessionStore.session" :session="sessionStore.session"></RouterLink>
     <RouterLink to="/" draggable="false" class="router" v-else>Sign Up</RouterLink>
-    <RouterLink to="/Login" draggable="false" class="router" v-if="session" :session="session"
-      >Homepage</RouterLink
-    >
+    <RouterLink to="/Login" draggable="false" class="router" v-if="sessionStore.session" :session="sessionStore.session">Homepage</RouterLink>
     <RouterLink to="/Login" draggable="false" class="router" v-else>Log In</RouterLink>
     <RouterLink to="/Grades" draggable="false" class="router" false>Grades</RouterLink>
     <RouterLink to="/Attendance" draggable="false" class="router" false>Attendance</RouterLink>
-    <button class="button block" @click="signOut" v-if="session" :session="session">
+    <button class="button block" @click="signOut" v-if="sessionStore.session" :session="sessionStore.session">
       Sign Out
     </button>
     <RouterView />
@@ -49,6 +38,7 @@ async function signOut() {
 #header {
   font-size: 40px;
 }
+
 .router {
   border: 10px;
   padding: 10px;
