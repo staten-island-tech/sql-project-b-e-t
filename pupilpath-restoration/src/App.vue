@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { onMounted } from 'vue'
-import { session, useSessionStore } from './stores/store.js';
+import { useSessionStore } from './stores/store.js';
 import { supabase } from './supabase'
 
 const sessionStore = useSessionStore();
@@ -22,13 +22,13 @@ async function signOut() {
 
 <template>
   <div id="container" false>
-    <RouterLink to="/" draggable="false" class="router" v-if="session" :session="session"></RouterLink>
+    <RouterLink to="/" draggable="false" class="router" v-if="sessionStore.session" :session="sessionStore.session"></RouterLink>
     <RouterLink to="/" draggable="false" class="router" v-else>Sign Up</RouterLink>
-    <RouterLink to="/Login" draggable="false" class="router" v-if="session" :session="session">Homepage</RouterLink>
+    <RouterLink to="/Login" draggable="false" class="router" v-if="sessionStore.session" :session="sessionStore.session">Homepage</RouterLink>
     <RouterLink to="/Login" draggable="false" class="router" v-else>Log In</RouterLink>
     <RouterLink to="/Grades" draggable="false" class="router" false>Grades</RouterLink>
     <RouterLink to="/Attendance" draggable="false" class="router" false>Attendance</RouterLink>
-    <button class="button block" @click="signOut" v-if="session" :session="session">
+    <button class="button block" @click="signOut" v-if="sessionStore.session" :session="sessionStore.session">
       Sign Out
     </button>
     <RouterView />

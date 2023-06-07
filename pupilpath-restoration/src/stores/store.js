@@ -1,21 +1,22 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+// import { ref } from 'vue'
 import { supabase } from '../supabase'
 
-const session = ref()
+// const session = ref()
 
 export const useSessionStore = defineStore('session', {
+  state: () => ({
+    session: false
+  }),
   actions: {
     async sessionCheck() {
       supabase.auth.getSession().then(({ data }) => {
-        session.value = data.session
+        this.session = data.session
       })
 
       supabase.auth.onAuthStateChange((_, _session) => {
-        session.value = _session
+        this.session = _session
       })
     }
   }
 })
-
-export { session }
