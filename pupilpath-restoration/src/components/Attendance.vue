@@ -3,7 +3,7 @@
   <div>
     <label class="text" for="dateSelected">Date Selected</label>
     <br />
-    <label id="dateSelected" class="text">{{ cleanDate }}</label>
+    <label id="dateSelected">{{ cleanDate }}</label>
     <br />
     <br />
     <label class="text" for="attendance">Mark the day as:</label>
@@ -55,7 +55,6 @@ addEventListener('click', () => {})
 onclick = () => {
   //Get clean date from clicked date
   cleanDate = date.value.toString().split(' ').slice(0, 4).join(' ')
-  console.log(cleanDate)
   document.getElementById('dateSelected').innerHTML = cleanDate
 }
 
@@ -84,9 +83,11 @@ async function markAttendance(value, date, attendance) {
       }
     }
     attributes.value.push(newAttr)
+    attributes.value.sort((a, b) => {
+      return new Date(a.dates) - new Date(b.dates)
+    })
     updateAttributes()
-    //console.log(date.toDateString());
-    //console.log(attributes.value);
+    console.log(attributes.value)
   } catch (error) {
     alert(error.message)
   }
@@ -95,7 +96,8 @@ async function markAttendance(value, date, attendance) {
 function clearAttendance(date) {
   for (const attrs in attributes.value) {
     if (attributes.value[attrs].dates == date.toDateString()) {
-      delete attributes.value[attrs]
+      //pop the element out of the array
+      attributes.value.splice(attrs, 1)
       updateAttributes()
     }
   }
@@ -112,14 +114,9 @@ async function getAttributes() {
 
     if (error && status !== 406) throw error
 
-    // if (data) {
-    //   console.log(data)
-    //   attributes.value = data.attributes
-
-    // }
     if (data && data.length > 0) {
-      console.log(data)
-      attributes.value.splice(0, attributes.value.length, data[0].attributes)
+      console.log(data[0].attributes)
+      attributes.value = data[0].attributes
     }
   } catch (error) {
     alert(error.message)
@@ -147,8 +144,6 @@ async function updateAttributes() {
 <style>
 .text {
   font-size: 20px;
-  background-color: rgb(240, 240, 240);
-  color: black;
 }
 
 .green {
