@@ -148,6 +148,7 @@ async function updateAttributes() {
 .text {
   font-size: 20px;
   background-color: rgb(240, 240, 240);
+  color: black;
 }
 
 .green {

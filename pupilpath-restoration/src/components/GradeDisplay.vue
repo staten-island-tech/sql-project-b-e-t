@@ -100,6 +100,7 @@ async function updateProfileClearInputs() {
 div {
   background-color: rgb(240, 240, 240);
   padding: 10px;
+  color: black;
 }
 td,
 th {
@@ -107,5 +108,6 @@ th {
   text-align: left;
   padding: 8px;
   background-color: rgb(240, 240, 240);
+  color: black;
 }
 </style>
