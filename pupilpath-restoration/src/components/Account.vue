@@ -95,7 +95,7 @@ async function updateProfileclearInputs() {
   <div>
     <button class="button block" @click="updateProfileclearInputs">Update</button>
   </div>
-  <div v-for="data in data" :key="data.id">Welcome, {{ data.first_name }}, to "pupilpath"</div>
+  <div v-for="data in data" :key="data.id">Welcome {{ data.first_name }} to "pupilpath"</div>
 </template>
 <style scoped>
 div {
