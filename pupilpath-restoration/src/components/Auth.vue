@@ -49,5 +49,6 @@ div {
   align-content: center;
   padding: 10px;
   background-color: rgb(240, 240, 240);
+  color: black;
 }
 </style>
