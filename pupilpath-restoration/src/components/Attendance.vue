@@ -1,6 +1,6 @@
 <template>
   <VDatePicker v-model="date" mode="date" is-required :attributes="attributes" />
-  <div>
+  <div id="caption">
     <label class="text" for="dateSelected">Date Selected</label>
     <br />
     <label id="dateSelected">{{ cleanDate }}</label>
@@ -156,5 +156,9 @@ async function updateAttributes() {
 
 .red {
   background-color: red;
+}
+#caption {
+  background-color: white;
+  margin-top: 10px;
 }
 </style>
